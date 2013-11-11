@@ -9,3 +9,13 @@ When(/^I fill the register form with valid data$/) do
   fill_in 'reader_password_confirmation', with: 'albaverde'
   click_button 'Register'
 end
+
+Then(/^I should be registered in application$/) do
+  expect(Reader.find_by_email('porna@mail.com')).not_to be_nil
+end
+
+Then(/^I should be logged in$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+
