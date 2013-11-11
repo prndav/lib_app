@@ -46,6 +46,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.12.2'
+  gem 'spork-rails', '4.0.0'
 end
 
 group :test do
