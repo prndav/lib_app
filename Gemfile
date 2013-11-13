@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
-
+gem 'email_validator'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
@@ -50,6 +50,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'shoulda-matchers'
   gem 'cucumber-rails', require:false
   gem "database_cleaner", '1.0.0.RC1'
 end
