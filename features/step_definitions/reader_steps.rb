@@ -15,7 +15,7 @@ Then(/^I should be registered in application$/) do
 end
 
 Then(/^I should be logged in$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content('Welcome, porna@mail.com')
 end
 
 
@@ -34,6 +34,20 @@ end
 Then(/^I should not be registered in application$/) do
   expect(Reader.find_by_email('porna')).to be_nil
 end
+
+Given(/^I am a guest$/) do
+
+end
+
+When(/^I go to home page$/) do
+  visit root_url
+end
+
+Then(/^I should see guest menu$/) do
+  expect(page).to have_selector('#top-menu')
+  expect(page).to have_link('Register', href: register_path)
+end
+
 
 
 
