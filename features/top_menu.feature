@@ -7,5 +7,10 @@ Feature: Top menu
 
   Scenario: Guest user
     Given I am a guest
-    When I go to home page
+    When I go to home page as guest
     Then I should see guest menu
+
+  Scenario: Reader
+    Given I am a "porna@gmail.com" reader
+    When I go to home page as reader
+    Then I should see "porna@gmail.com" reader menu

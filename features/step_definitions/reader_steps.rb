@@ -39,13 +39,40 @@ Given(/^I am a guest$/) do
 
 end
 
-When(/^I go to home page$/) do
+When(/^I go to home page as guest$/) do
   visit root_url
 end
 
 Then(/^I should see guest menu$/) do
   expect(page).to have_selector('#top-menu')
   expect(page).to have_link('Register', href: register_path)
+end
+
+Given(/^I am a "(.*?)" reader$/) do |email|
+
+end
+
+When(/^I go to home page as reader$/) do
+  visit root_url
+end
+
+Then(/^I should see "(.*?)" reader menu$/) do |email|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given(/^Reader with "(.*?)" exists$/) do |email|
+  Reader.create( email: email, password: 'albaverde', password_confirmation: 'albaverde')
+end
+
+When(/^I fill the login form with valid data for "(.*?)" reader$/) do |email|
+  visit("/login")
+  fill_in 'login_email', with: email
+  fill_in 'login_password', with: 'albaverde'
+  click_button 'Login'
+end
+
+Then(/^I should be logged in as "(.*?)" reader$/) do |email|
+  expect(page).to have_content("Welcome, #{email}")
 end
 
 
