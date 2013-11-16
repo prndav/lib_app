@@ -47,6 +47,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'spork-rails'
+  gem 'pry-rails'
 end
 
 group :test do
