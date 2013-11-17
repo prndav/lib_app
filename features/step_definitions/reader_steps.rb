@@ -49,7 +49,8 @@ Then(/^I should see guest menu$/) do
 end
 
 Given(/^I am a "(.*?)" reader$/) do |email|
-
+  step "reader with \"#{email}\" exists"
+  step "I fill the login form with valid data for \"#{email}\" reader"
 end
 
 When(/^I go to home page as reader$/) do
@@ -57,7 +58,7 @@ When(/^I go to home page as reader$/) do
 end
 
 Then(/^I should see "(.*?)" reader menu$/) do |email|
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content("Welcome, #{email}")
 end
 
 Given(/^Reader with "(.*?)" exists$/) do |email|
