@@ -7,6 +7,7 @@ class ReadersController < ApplicationController
     @reader = Reader.new(reader_params)
 
     if @reader.save
+      session[:reader_id] = @reader.id
       flash[:notice] = 'You registered!'
       redirect_to root_url
     else

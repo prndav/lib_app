@@ -51,9 +51,16 @@ describe ReadersController do
       it 'redirects to root url' do
         expect(response).to redirect_to root_url
       end
+
       it 'assigns a success flash message' do
         expect(flash[:notice]).not_to be_nil
       end
+
+      it 'logs in reader' do
+        post :create, reader: params
+        expect(session[:reader_id]).to eq(reader.id)
+      end
+
     end
 
     context 'when save message return false' do
