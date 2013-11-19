@@ -10,6 +10,11 @@ class SessionsController < ApplicationController
     redirect_to root_url, notice: 'Its working, yeah'
   end
 
+  def destroy
+    session[:reader_id] = nil
+    redirect_to root_url
+  end
+
   private
 
     def login_params
