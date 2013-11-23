@@ -14,6 +14,6 @@ Then(/^the book should be added to database$/) do
 end
 
 Then(/^I should see it on library page$/) do
-  # visit books_url
-  # expect(page).to have_content('The scanner darkly')
+  visit books_url
+  expect(page).to have_content('The scanner darkly')
 end
