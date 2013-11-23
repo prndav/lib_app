@@ -6,5 +6,6 @@ Libapp::Application.routes.draw do
 
   resources :readers
   resources :sessions
+  resources :books
   root 'home#index'
 end
