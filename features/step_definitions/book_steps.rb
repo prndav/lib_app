@@ -36,3 +36,20 @@ Then(/^I should see the new book form with error message$/) do
   expect(page).to have_selector('.notice')
 end
 
+Given(/^book "(.*?)" exists$/) do |book|
+  Book.create(title: book)
+end
+
+When(/^I go to "(.*?)" book page$/) do |book|
+  hamlet = Book.find_by_title(book)
+  visit book_path(book)
+end
+
+Then(/^I should see "(.*?)" book details$/) do |book|
+  expect(page).to have_content(book)
+end
+
+Then(/^I should see "(.*?)" book edit link$/) do |book|
+  expect(page).to have_link('edit')
+end
+
