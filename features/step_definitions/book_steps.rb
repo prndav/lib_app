@@ -42,7 +42,7 @@ end
 
 When(/^I go to "(.*?)" book page$/) do |book|
   hamlet = Book.find_by_title(book)
-  visit book_path(book)
+  visit book_path(hamlet)
 end
 
 Then(/^I should see "(.*?)" book details$/) do |book|

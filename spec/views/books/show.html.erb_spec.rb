@@ -7,4 +7,10 @@ describe 'books/show.html.erb' do
     render
     expect(rendered).to have_content(book.title)
   end
+
+  it 'has edit link' do
+    assign(:book, book)
+    render
+    expect(rendered).to have_link('edit')
+  end
 end

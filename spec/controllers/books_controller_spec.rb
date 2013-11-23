@@ -83,4 +83,17 @@ describe BooksController do
       end
     end
   end
+
+  describe 'GET show' do
+    let!(:book) { Book.create(title: 'Cats craddle') }
+
+    it 'sends find message to book class' do
+      Book.should_receive(:find)
+      get :show, id: book.id
+    end
+    it 'assings book to @book variable' do
+      get :show, id: book.id
+      expect(assigns[:book]).to eq(book)
+    end
+  end
 end
