@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe BooksController do
+  describe 'GET index' do
+    it 'assigns all books to @books variable' do
+      Book.stub(:all).and_return(true)
+      get :index
+      expect(assigns[:books]).to eq(Book.all)
+    end
+    it 'renders index template'
+  end
   describe 'GET new' do
     let!(:book) { mock_model('Book') }
 
@@ -55,6 +63,23 @@ describe BooksController do
       end
       it 'assigns flash message' do
         expect(flash[:success]).not_to be_nil
+      end
+    end
+
+    context 'when save message returns false' do
+      before :each do
+        book.stub(:save).and_return(false)
+        post :create, book: params
+      end
+
+      it 'renders new template' do
+        expect(response).to render_template(:new)
+      end
+      it 'sets flash message' do
+        expect(flash[:notice]).not_to be_nil
+      end
+      it 'assings book to @book' do
+        expect(assigns(:book)).to eq(book)
       end
     end
   end

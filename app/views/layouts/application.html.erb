@@ -8,6 +8,9 @@
 </head>
 <body>
 <%= top_menu %>
+<% flash.each do |key, val| %>
+  <%= content_tag(:div, val, class: "#{key}" ) %>
+<% end %>
 <%= yield %>
 
 </body>

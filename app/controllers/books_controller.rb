@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def index
-
+    @books = Book.all
   end
 
   def new
@@ -9,9 +9,13 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    @book.save
-    flash[:success] = 'Book was successfully created.'
-    redirect_to books_url
+    if @book.save
+      flash[:success] = 'Book was successfully created.'
+      redirect_to books_url
+    else
+      flash[:notice] = 'Something went wrong'
+      render :new
+    end
   end
 
   private
