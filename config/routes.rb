@@ -1,4 +1,5 @@
 Libapp::Application.routes.draw do
+  resources :books
   get '/register', to: 'readers#new', as: 'register'
   get "home/index"
   get '/login', to: 'sessions#new', as: 'login'
@@ -6,6 +7,5 @@ Libapp::Application.routes.draw do
 
   resources :readers
   resources :sessions
-  resources :books
   root 'home#index'
 end
