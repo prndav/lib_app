@@ -53,3 +53,15 @@ Then(/^I should see "(.*?)" book edit link$/) do |book|
   expect(page).to have_link('edit')
 end
 
+When(/^I go to nonexistent book page$/) do
+  visit book_path(1000)
+end
+
+Then(/^I should be redirected to library page$/) do
+  expect(current_path).to eq('/books')
+end
+
+Then(/^I should see "(.*?)" error message$/) do |message|
+  expect(page).to have_content(message)
+end
+

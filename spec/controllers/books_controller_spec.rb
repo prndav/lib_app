@@ -95,5 +95,16 @@ describe BooksController do
       get :show, id: book.id
       expect(assigns[:book]).to eq(book)
     end
+
+    context 'when bood does not exist' do
+      it 'raises error ' do
+        get :show, id: 10000000000
+        expect(response).to raise_error
+      end
+      it 'redirect_to index page' do
+        get :show, id: 10000000000
+        expect(response).to redirect_to(books_url)
+      end
+    end
   end
 end

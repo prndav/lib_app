@@ -9,6 +9,9 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+  rescue
+    flash[:notice] = "Book doesn't exist"
+    redirect_to books_url
   end
 
   def create
