@@ -3,6 +3,17 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  def edit
+    @book = Book.find(params[:id])
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    @book.update_attributes(book_params)
+    flash[:success] = 'Officially updated'
+    redirect_to @book
+  end
+
   def new
     @book = Book.new
   end
@@ -23,6 +34,12 @@ class BooksController < ApplicationController
       flash[:notice] = 'Something went wrong'
       render :new
     end
+  end
+
+  def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
+    redirect_to books_url
   end
 
   private

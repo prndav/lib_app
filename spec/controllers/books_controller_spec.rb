@@ -1,6 +1,61 @@
 require 'spec_helper'
 
 describe BooksController do
+  describe 'DELETE destroy' do
+    let!(:book) { Book.create(title: 'The eye in the sky') }
+    it 'deletes book' do
+      expect {
+      delete :destroy, { :id => book.to_param }
+      }.to change(Book, :count).by(-1)
+    end
+    it 'redirects to index page' do
+      delete :destroy, id: book.to_param
+      expect(response).to redirect_to(books_url)
+    end
+  end
+  describe 'PUT update' do
+    let!(:book) { Book.create(title: 'Three stigmata of Palmer Eldritch') }
+    let!(:params) do
+      {
+      'title' => 'Player piano'
+      }
+    end
+    it 'sends find message to Book class' do
+      Book.should_receive(:find).with("#{book.id}").and_return(book)
+      put :update, book: params, id: book.id
+    end
+    it 'sends update_attributes message to book' do
+      Book.stub(:find).and_return(book)
+      book.should_receive(:update_attributes)
+      put :update, book: params, id: book.id
+    end
+    it 'assigns flash message' do
+      put :update, book: params, id: book.id
+      expect(flash[:success]).not_to be_nil
+    end
+    it 'redirects to book' do
+      put :update, book: params, id: book.id
+      expect(response).to redirect_to book
+    end
+  end
+  describe 'GET edit' do
+    let!(:book) { Book.create(title: 'Ubik') }
+
+    before :each do
+      get :edit, id: book.id
+    end
+    it 'sends find message to Book class' do
+      Book.should_receive(:find).with("#{book.id}").and_return(book)
+      get :edit, id: book.id
+    end
+    it 'assings @book variable to the view' do
+      expect(assigns[:book]).to eq(book)
+    end
+    it 'renders edit template' do
+      get :edit, id: book.id
+      expect(response).to render_template :edit
+    end
+  end
   describe 'GET index' do
     it 'assigns all books to @books variable' do
       Book.stub(:all).and_return(true)

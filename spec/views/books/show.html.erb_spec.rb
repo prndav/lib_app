@@ -13,4 +13,10 @@ describe 'books/show.html.erb' do
     render
     expect(rendered).to have_link('edit')
   end
+
+  it 'has delete link' do
+    assign(:book, book)
+    render
+    expect(rendered).to have_link('delete')
+  end
 end
